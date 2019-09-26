@@ -9,6 +9,7 @@ site: bookdown::bookdown_site
 output:
   bookdown::word_document2:
     reference_docx: Inforino_formatting_EN.docx
+    pandoc_args: --lua-filter=filter.lua
     toc: no
   bookdown::html_document2: default
 bibliography: article.bib
@@ -43,7 +44,9 @@ Currently, a lot of attention is paid to the development of wireless information
 
 It is absolutely expected that measuring system should operate in both fixed  and mobile modes. The latter requires that the device is lightweight and low-power. The main components of the system are smart wireless sensors (or beacons) and the processing module as shown on Fig. \@ref(fig:system).
 
+::: {custom-style="figure caption"}
 ![(\#fig:system) Block diagram of the system](img/system.png){width=6.7cm}
+:::
 
 To lower the design costs and to make system more universal we need to use identical internal structure of all beacons. This will allow us to extend the system without limits and to simplify beacon replacement on their failure. In the same time we need to lower the cost of each beacon to prevent financial losses on beacon breakage or its forfeit.
 
@@ -53,7 +56,9 @@ Currently there are a plenty number of commercial sensors for various physical q
 
 Currently, there are a number of basis wireless interfaces for the IIoT: Bluetooth (with its Low Energy variant) [@bluetooth], LoRaWAN [@lora], Z-Wave [@zwave], ZigBee [@zigbee] and Wi-Fi [@wifi]. In common only a few radio modules are built as the system-on-chip (System-on-Chip), and this fact puzzles the design workflow because of the low-level programming. The Bluetooth interface itself is rather complicated technology, so it is difficult to perform programming and design of printed circuit boards for Bluetooth-capable SoCs. From the other hand if we choose design with two separate key elements - radio frequency transceiver and microcontroller (or microprocessor) chip we will get more flexible solution but need to use special measures to provide good autonomy of the device. In terms of battery life, two opposite implementations can be considered - based on Wi-Fi and Lora. In this case, the development of Wi-Fi-based device requires less time due to the presence of universal SoCs.
 
+::: {custom-style="figure caption"}
 ![(\#fig:smart-sens) Block diagram of the smart wireless sensor](img/smart_sensor.png){width=4.4cm}
+:::
 
 However, the quickly created such a Wi-Fi implementation is characterized by low battery life and a fairly small operating range of the system. Therefore, at present time and in practical development the LoRa [@lora] (short for long range) technology is very often used, which differs by efficient use of the radio frequency spectrum, a large operating range, low cost and low energy consumption from the power source. In addition, the advantage of the technology is the use of the license-free frequency band -- Industrial, Scientific and Medical (ISM).
 
@@ -65,10 +70,12 @@ Study of radio propagation of the microwave range over-the-horizon is in full sw
 
 To be precise, it is mostly due to the spatial distribution of the refractive index. The refractive index of the troposphere can be found by the empirical formula:
 
+::: {custom-style="MTDisplayEquation"}
 \begin{equation}
 n = 1 + \frac{77.6}{T}\left( P+4810\frac{e}{T} \right) \cdot 10^6.
 (\#eq:climate)
 \end{equation}
+:::
 
 where $T$ is air temperature, measured in degree Kelvin, $e$ its humidity measured in percent and $p$ — atmospheric pressure in hPa. Such a concept as the «normal troposphere» is described by a change in pressure and temperature with height. With increasing altitude, the temperature decreases with speed 6.5 K/km. 
 
@@ -76,7 +83,9 @@ When air temperature is about 0 degree Celsius and the air pressure is about 100
 
 Temperature inversion creates a surface or elevated ducts. Inversion of humidity — evaporation ducts, mist, brume and mirages (see Fig. \@ref(fig:fly)).
 
+::: {custom-style="figure caption"}
 ![(\#fig:fly) The 19th century illustration, which shows an example of optical illusion called "Flying Dutchman"](img/fly.jpg){width=8cm}
+:::
 
 In tropical latitudes, the evaporation duct almost always appears, and its thickness may have up to 50 meters. In the temperate climate the likelihood appears to be 50 percent with thickness from 8 to 15 meters.
 
@@ -84,17 +93,21 @@ Measurement of such ducts is necessary to assess the maximum range of radio syst
 
 Received refractive index data were found from experimental measurements of meteorological parameters using an unmanned aerial vehicle (Fig. \@ref(fig:UAV)). Both the evaporation ducts (Fig. \@ref(fig:Mas-evap)) and elevation duct (Fig. \@ref(fig:Mas-elev)) were measured. The elevation duct can be modeled by a piecewise linear model. Evaporative ducts are usually set using the Paules-Jeske model using the formula \@ref(eq:PJ):
 
+::: {custom-style="MTDisplayEquation"}
 \begin{equation}
 M(h) = M(0) + 0.125 \left[ h-h_d \cdot \ln\frac{h+h_0}{h_0} \right]
 (\#eq:PJ)
 \end{equation}
+:::
 
 An alternative to this formula is the parabolic layer described by V. A. Fock according to the formula \@ref(eq:Fock):
 
+::: {custom-style="MTDisplayEquation"}
 \begin{equation}
 M(h) = M(h_d) + \frac{10^6}{a}\frac{(h-h_d)^2}{h+l}.
 (\#eq:Fock)
 \end{equation}
+:::
 
 
 ## Beacons construction
@@ -103,9 +116,13 @@ The manufacturers of semiconductor devices offer a plenty set of sensors for tem
 
 Currently only one vendor – Bosch Sensortec GmbH [@bhsc] have sensors for measurement of all 3 parameters in the same time. The models are BME280 [@bme280] and BME680 [@bme680]. The BME680 module is more advanced and differs from BME280 by existences of extra features – gas detection and air quality control. So the functionality of BME280 is enough for current project.
 
+::: {custom-style="figure caption"}
 ![(\#fig:UAV) UAV with sensors](img/UAV.png){width=8cm}
+:::
 
+::: {custom-style="figure caption"}
 ![(\#fig:Mas-evap) Measured evaporation duct](img/Mas_evap.png){width=8cm}
+:::
 
 The BME280 module may be described by low power consumption and high accuracy [@bme280]. It has two digital interfaces – I2C and SPI buses. We use I2C because of the ability to obtain data on long distances and ease of multiplexing for multiple I2C sensors connected to one beacon.
 
@@ -114,9 +131,13 @@ We have developed two prototypes of wireless measurement modules: using Wi-Fi te
 Both prototypes use standard protected Lithium-Ion rechargeable battery pack with standard. Each device has step-up and step-down DC-DC module to provide stabilized 3.3 V supply voltage independently on battery discharge level. This measure allows us to use the battery charge as efficiently as possible. Each device measures and sends data once a minute then it is programmed to enter deep sleep state.
 Let's examine each of the prototypes in more detail. The Wi-Fi based is shown on Fig. \@ref(fig:sens-photo-wi-fi), while Lo-Ra based is shown on Fig. \@ref(fig:sens-photo-lora). 
 
+::: {custom-style="figure caption"}
 ![(\#fig:Mas-elev) Measured surface elevated duct](img/Mas_elev.png){width=8cm}
+:::
 
+::: {custom-style="figure caption"}
 ![(\#fig:sens-photo-wi-fi) Climatic sensor board with battery and Wi-Fi radio module](img/prototype.jpg){width=7.8cm}
+:::
 
 The Wi-Fi based prototype consumes 150 mA during measurement of environmental parameters and sending them via radio interface. Then it goes to sleep with current about 70 uA. Rechargeable battery discharge will last longer in the case of more rarely sending data.
 
@@ -132,9 +153,13 @@ The gateway is configured and acts as DHCP (to assign IP address), NTP (to set t
 
 Wireless security is assured by using of Wi-Fi Protected Access II (WPA2) encryption. The system operates as follows:
 
+::: {custom-style="figure caption"}
 ![(\#fig:sens-photo-lora) Climatic sensor board with battery and LoRa radio module](img/prototype-lora.jpg){width=7.8cm}
+:::
 
+::: {custom-style="figure caption"}
 ![(\#fig:router-wi-fi) Diagram of Wi-Fi-based system implementation](img/router-wifi.png){width=7.8cm}
+:::
 
 after power on, the wireless router establishes mobile data network connection by using integrated cellular modem and synchronizes its clock with the defined NTP server. Then it mounts partition from USB flash drive. After that it is ready to serve and  waits for connection(s) from beacons. Beacons connect to the router in regular time intervals, obtain IP address and date from it and send the measured environmental parameters to it.
 
