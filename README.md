@@ -4,7 +4,7 @@
 Такой формат характерен для многих вариантов IEEE Transactions.
 
 Для работы с этим шаблоном необходимо установить язык программирования [R](https://cran.r-project.org/bin/windows) и среду [RStudio](https://www.rstudio.com/products/rstudio/download/preview/).
-Также рекомендуется наличие редактора Markdown-редактора - например, [ReText](https://github.com/retext-project/retext) или [Typora](https://typora.io).
+Также рекомендуется наличие [Markdown](http://daringfireball.net/projects/markdown)-редактора - например, [ReText](https://github.com/retext-project/retext) или [Typora](https://typora.io).
 
 Полный список файлов и каталогов представлен в таблице ниже:
 
@@ -33,7 +33,7 @@
 Подготовку статьи следует выполнять в следующем порядке:
 
 1. Задать название статьи в поле `title` файла `index.Rmd`.
-2. Написать текст статьи в файле `index.Rmd` с использованием Markdown и его расширений (RMarkdown и bookdown).
+2. Написать текст статьи в файле `index.Rmd` с использованием Markdown и его расширений ([RMarkdown Cheat Sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/master/rmarkdown-2.0.pdf) и [bookdown](https://bookdown.org/home/getting-started.html)).
 3. Преобразовать документ в HTML-формат кнопкой *Build Book* → `bookdown::html_document2` для проверки правильности нумерации рисунков, таблиц, формул и ссылок на них.
 4. Преобразовать документ в docx-формат  кнопкой *Build Book* → `bookdown::docx_document2`.
 
