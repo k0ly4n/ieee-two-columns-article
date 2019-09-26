@@ -1,0 +1,9 @@
+book_filename: "article"
+
+language:
+  label:
+    fig: 'Fig. '
+    tab: 'Table '
+    exm: 'Listing '
+
+delete_merged_file: yes

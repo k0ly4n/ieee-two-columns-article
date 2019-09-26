@@ -1,0 +1,9 @@
+~*.tmp
+~$*
+*.bak
+Thumbs.db
+.~lock*
+.Rproj.user
+_book
+.Rhistory
+*.html
