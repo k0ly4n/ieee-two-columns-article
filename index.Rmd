@@ -1,8 +1,6 @@
 ---
 book_filename: "article"
 title: Application of Wi-Fi and LoRa Technologies for Wireless Measurement of Physical Quantities
-
-
 documentclass: article
 papersize: a4
 site: bookdown::bookdown_site
@@ -11,30 +9,37 @@ output:
     reference_docx: Inforino_formatting_EN.docx
     pandoc_args: --lua-filter=filter.lua
     toc: no
+    number_sections: no
   bookdown::html_document2: default
 bibliography: article.bib
 link-citations: yes
-
 #csl: gost-r-7-0-5-2008-numeric.csl
 csl: ieee.csl
 ---
 
-
+::: {custom-style="Author"}
 M.S. Mikhailov  
 Radio Devices and Antenna Systems Department  
 National Research University "MPEI"  
 Moscow, Russian Federation  
 MikhailovMS@mpei.ru  
+:::
 
+::: {custom-style="Author"}
 N.O. Strelkov  
 Radio Technical Fundamentals Department  
 National Research University "MPEI"  
 Moscow, Russian Federation  
 StrelkovNO@mpei.ru  
+:::
 
+::: {custom-style="abstract"}
 ***Abstract*** --- **In this paper we present a brief description of existing wireless data transmission technologies used in the Internet of Things (IoT) and the Internet of Industrial Things (IIoT). Then we consider the application of Wi-Fi and LoRa technologies for wireless measurement and monitoring of physical quantities (really they are the parameters of the evaporation duct – air temperature, humidity and atmospheric pressure). The system contains wireless sensing nodes (beacons) and the unit for host-centric processing and storage of data. We provide test results of a comparison of Wi-Fi- and LoRa-based implementations.**
+:::
 
+::: {custom-style="Keywords"}
 ***Keywords*** --- ***Internet of Things, Wireless LAN, remote sensing, wireless sensor network, radiowave propagation, atmosphere***.
+:::
 
 # Introduction
 
